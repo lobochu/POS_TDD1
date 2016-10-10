@@ -1,7 +1,7 @@
 package tw.lobo.pos.test;
 
 
-import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,29 +13,57 @@ public class SellOneItemTest {
 
 
     @Test
+    @Ignore("Refactoring...")
+    public void anotherProductFound() throws Exception {
+        //Arrange
+        Display display = new Display();
+        Sale sale = new Sale(display);
+
+        //Act
+        sale.onBarcode("23456");
+
+        //Assert
+        assertEquals("$12.50", display.getText());
+
+    }
+
+    @Test
     public void productFound() throws Exception {
         //Arrange
         Display display = new Display();
-        Sale sale = new Sale();
+        Sale sale = new Sale(display);
 
-        //Act
+        //Act , Sale: Input , Display: Output
+        //Output closer to the input.
         sale.onBarcode("12345");
 
         //Assert
         assertEquals("$7.95", display.getText());
-
     }
 
 
     public static class Display {
+
+        private String text;
+
         public String getText() {
-            return "$7.95";
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
         }
     }
 
     public static class Sale {
-        public void onBarcode(String barcode) {
+        private Display display;
 
+        public Sale(Display display) {
+            this.display = display;
+        }
+
+        public void onBarcode(String barcode) {
+            display.setText("$7.95");
         }
     }
 }
