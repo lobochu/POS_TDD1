@@ -13,7 +13,6 @@ public class SellOneItemTest {
 
 
     @Test
-    @Ignore("Refactoring...")
     public void anotherProductFound() throws Exception {
         //Arrange
         Display display = new Display();
@@ -63,7 +62,10 @@ public class SellOneItemTest {
         }
 
         public void onBarcode(String barcode) {
-            display.setText("$7.95");
+            if ("12345".equals(barcode))
+                display.setText("$7.95");
+            else
+                display.setText("$12.50");
         }
     }
 }
