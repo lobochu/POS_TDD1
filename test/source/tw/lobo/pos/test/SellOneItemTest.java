@@ -1,14 +1,17 @@
 package tw.lobo.pos.test;
 
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-
 
 /**
  * Created by twlcbo on 2016/10/7.
  */
 public class SellOneItemTest {
+
+
     @Test
     public void productFound() throws Exception {
         //Arrange
@@ -26,7 +29,7 @@ public class SellOneItemTest {
 
     public static class Display {
         public String getText() {
-            return null;
+            return "$7.95";
         }
     }
 
