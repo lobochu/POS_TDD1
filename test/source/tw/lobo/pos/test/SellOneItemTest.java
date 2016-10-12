@@ -4,6 +4,8 @@ package tw.lobo.pos.test;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -85,10 +87,15 @@ public class SellOneItemTest {
             if ("".equals(barcode)) {
                 display.setText("Scanning error: empty barcode");
             } else {
+                //introduce lookup table
+                HashMap<String, String> pricesByBarcode = new HashMap<String, String>() {{
+                    put("12345", "$7.95");
+                    put("23456", "$12.50");
+                }};
                 if ("12345".equals(barcode))
-                    display.setText("$7.95");
+                    display.setText(pricesByBarcode.get("12345"));
                 else if ("23456".equals(barcode))
-                    display.setText("$12.50");
+                    display.setText(pricesByBarcode.get("23456"));
                 else
                     display.setText("Product not found for " +
                             barcode);
