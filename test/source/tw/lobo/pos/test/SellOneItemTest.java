@@ -3,7 +3,9 @@ package tw.lobo.pos.test;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -64,8 +66,7 @@ public class SellOneItemTest {
     @Test
     public void emptyBarcode() throws Exception {
         Display display = new Display();
-        Sale sale = new Sale(display, new HashMap<String, String>() {{
-        }});
+        Sale sale = new Sale(display, Collections.<String, String> emptyMap());
 
         sale.onBarcode("");
 
@@ -87,9 +88,9 @@ public class SellOneItemTest {
 
     public static class Sale {
         private Display display;
-        private HashMap<String, String> pricesByBarcode;
+        private Map<String, String> pricesByBarcode;
 
-        public Sale(Display display, HashMap<String, String> pricesByBarcode) {
+        public Sale(Display display, Map<String, String> pricesByBarcode) {
             this.display = display;
             //introduce lookup table
             this.pricesByBarcode = pricesByBarcode;
