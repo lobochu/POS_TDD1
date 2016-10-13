@@ -1,6 +1,7 @@
 package tw.lobo.pos.test;
 
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -15,14 +16,25 @@ import static org.junit.Assert.assertEquals;
 public class SellOneItemTest {
 
 
-    @Test
-    public void anotherProductFound() throws Exception {
+    private Display display;
+    private Display display1;
+    private Sale sale;
+
+    @Before
+    public void setUp() throws Exception {
         //Arrange
-        Display display = new Display();
-        Sale sale = new Sale(display, new HashMap<String, String>() {{
+        display = new Display();
+
+        //Act , Sale: Input , Display: Output
+        //Output closer to the input.
+        sale = new Sale(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("23456", "$12.50");
         }});
+    }
+
+    @Test
+    public void anotherProductFound() throws Exception {
 
         //Act
         sale.onBarcode("23456");
@@ -34,15 +46,7 @@ public class SellOneItemTest {
 
     @Test
     public void productFound() throws Exception {
-        //Arrange
-        Display display = new Display();
-        Sale sale = new Sale(display, new HashMap<String, String>() {{
-            put("12345", "$7.95");
-            put("23456", "$12.50");
-        }});
 
-        //Act , Sale: Input , Display: Output
-        //Output closer to the input.
         sale.onBarcode("12345");
 
         //Assert
@@ -51,12 +55,6 @@ public class SellOneItemTest {
 
     @Test
     public void productNotFound() throws Exception {
-        //Arrange
-        Display display = new Display();
-        Sale sale = new Sale(display, new HashMap<String, String>() {{
-            put("12345", "$7.95");
-            put("23456", "$12.50");
-        }});
 
         sale.onBarcode("99999");
 
@@ -65,7 +63,6 @@ public class SellOneItemTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        Display display = new Display();
         Sale sale = new Sale(display, null);
         sale.onBarcode("");
 
