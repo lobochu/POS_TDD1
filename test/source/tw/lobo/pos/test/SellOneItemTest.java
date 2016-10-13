@@ -66,8 +66,7 @@ public class SellOneItemTest {
     @Test
     public void emptyBarcode() throws Exception {
         Display display = new Display();
-        Sale sale = new Sale(display, Collections.<String, String> emptyMap());
-
+        Sale sale = new Sale(display, null);
         sale.onBarcode("");
 
         assertEquals("Scanning error: empty barcode", display.getText());
