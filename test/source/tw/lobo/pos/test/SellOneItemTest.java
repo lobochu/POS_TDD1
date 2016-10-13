@@ -78,20 +78,21 @@ public class SellOneItemTest {
 
     public static class Sale {
         private Display display;
+        private HashMap<String, String> pricesByBarcode;
 
         public Sale(Display display) {
             this.display = display;
+            //introduce lookup table
+            this.pricesByBarcode = new HashMap<String, String>() {{
+                put("12345", "$7.95");
+                put("23456", "$12.50");
+            }};
         }
 
         public void onBarcode(String barcode) {
             if ("".equals(barcode)) {
                 display.setText("Scanning error: empty barcode");
             } else {
-                //introduce lookup table
-                HashMap<String, String> pricesByBarcode = new HashMap<String, String>() {{
-                    put("12345", "$7.95");
-                    put("23456", "$12.50");
-                }};
                 if (pricesByBarcode.containsKey(barcode))
                     display.setText(pricesByBarcode.get(barcode));
                 else
