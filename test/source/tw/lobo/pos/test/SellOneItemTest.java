@@ -1,7 +1,6 @@
 package tw.lobo.pos.test;
 
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -18,7 +17,10 @@ public class SellOneItemTest {
     public void anotherProductFound() throws Exception {
         //Arrange
         Display display = new Display();
-        Sale sale = new Sale(display);
+        Sale sale = new Sale(display, new HashMap<String, String>() {{
+            put("12345", "$7.95");
+            put("23456", "$12.50");
+        }});
 
         //Act
         sale.onBarcode("23456");
@@ -32,7 +34,10 @@ public class SellOneItemTest {
     public void productFound() throws Exception {
         //Arrange
         Display display = new Display();
-        Sale sale = new Sale(display);
+        Sale sale = new Sale(display, new HashMap<String, String>() {{
+            put("12345", "$7.95");
+            put("23456", "$12.50");
+        }});
 
         //Act , Sale: Input , Display: Output
         //Output closer to the input.
@@ -46,7 +51,10 @@ public class SellOneItemTest {
     public void productNotFound() throws Exception {
         //Arrange
         Display display = new Display();
-        Sale sale = new Sale(display);
+        Sale sale = new Sale(display, new HashMap<String, String>() {{
+            put("12345", "$7.95");
+            put("23456", "$12.50");
+        }});
 
         sale.onBarcode("99999");
 
@@ -56,7 +64,10 @@ public class SellOneItemTest {
     @Test
     public void emptyBarcode() throws Exception {
         Display display = new Display();
-        Sale sale = new Sale(display);
+        Sale sale = new Sale(display, new HashMap<String, String>() {{
+            put("12345", "$7.95");
+            put("23456", "$12.50");
+        }});
 
         sale.onBarcode("");
 
@@ -80,13 +91,10 @@ public class SellOneItemTest {
         private Display display;
         private HashMap<String, String> pricesByBarcode;
 
-        public Sale(Display display) {
+        public Sale(Display display, HashMap<String, String> pricesByBarcode) {
             this.display = display;
             //introduce lookup table
-            this.pricesByBarcode = new HashMap<String, String>() {{
-                put("12345", "$7.95");
-                put("23456", "$12.50");
-            }};
+            this.pricesByBarcode = pricesByBarcode;
         }
 
         public void onBarcode(String barcode) {
