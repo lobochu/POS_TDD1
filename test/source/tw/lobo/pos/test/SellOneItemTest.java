@@ -26,10 +26,10 @@ public class SellOneItemTest {
 
         //Act , Sale: Input , Display: Output
         //Output closer to the input.
-        sale = new Sale(display, new HashMap<String, String>() {{
+        sale = new Sale(new Catalog(display, new HashMap<String, String>() {{
             put("12345", "$7.95");
             put("23456", "$12.50");
-        }});
+        }}), this.display);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class SellOneItemTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        Sale sale = new Sale(display, null);
+        Sale sale = new Sale(new Catalog(display, null), this.display);
         sale.onBarcode("");
 
         assertEquals("Scanning error: empty barcode", display.getText());
@@ -79,48 +79,66 @@ public class SellOneItemTest {
         public void setText(String text) {
             this.text = text;
         }
+
+        public void displayPrice(String priceAsText) {
+            setText(priceAsText);
+        }
+
+        public void displayProductNotFoundMessage(String text) {
+            setText("Product not found for " + text);
+        }
+
+        public void displayEmptyBarcodeMessage() {
+            setText("Scanning error: empty barcode");
+        }
     }
 
     public static class Sale {
+        private final Catalog catalog;
         private Display display;
-        private Map<String, String> pricesByBarcode;
 
-        public Sale(Display display, Map<String, String> pricesByBarcode) {
+        public Sale(Catalog catalog, Display display) {
             this.display = display;
             //introduce lookup table
-            this.pricesByBarcode = pricesByBarcode;
+            this.catalog = catalog;
         }
 
         public void onBarcode(String barcode) {
             //SMELL Refused bequest; move this up the call stack?
             if ("".equals(barcode)) {
-                displayEmptyBarcodeMessage();
+                display.displayEmptyBarcodeMessage();
                 return;//guard clause
             }
 
-            String priceAsText = findPrice(barcode);
+            //1. Find price.
+            String priceAsText = catalog.findPrice(barcode);
+            //2. If didn't get one, display product not found
             if (priceAsText == null) {
-                displayProductNotFoundMessage("Product not found for " +
-                        barcode);
+                display.displayProductNotFoundMessage(barcode);
+                //3. If I did get one, diplay the price.
             } else {
-                displayPrice(priceAsText);
+                display.displayPrice(priceAsText);
             }
         }
 
-        private void displayPrice(String priceAsText) {
-            display.setText(priceAsText);
+    }
+
+    public static class Catalog {
+        private final Display display;
+        private final Map<String, String> pricesByBarcode;
+
+        public Catalog(Display display, Map<String, String> pricesByBarcode) {
+            this.display = display;
+            this.pricesByBarcode = pricesByBarcode;
         }
+
+        public Display getDisplay() {
+            return display;
+        }
+
 
         private String findPrice(String barcode) {
             return pricesByBarcode.get(barcode);
-        }
-
-        private void displayProductNotFoundMessage(String text) {
-            display.setText(text);
-        }
-
-        private void displayEmptyBarcodeMessage() {
-            displayProductNotFoundMessage("Scanning error: empty barcode");
         }
     }
 }
