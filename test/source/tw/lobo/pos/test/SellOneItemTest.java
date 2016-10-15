@@ -97,11 +97,14 @@ public class SellOneItemTest {
                 displayEmptyBarcodeMessage();
                 return;//guard clause
             }
-            if (pricesByBarcode.containsKey(barcode))
-                displayPrice(findPrice(barcode));
-            else
+
+            String priceAsText = findPrice(barcode);
+            if (priceAsText == null) {
                 displayProductNotFoundMessage("Product not found for " +
                         barcode);
+            } else {
+                displayPrice(priceAsText);
+            }
         }
 
         private void displayPrice(String priceAsText) {
