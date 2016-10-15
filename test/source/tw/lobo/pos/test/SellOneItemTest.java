@@ -95,14 +95,26 @@ public class SellOneItemTest {
         public void onBarcode(String barcode) {
             //SMELL Refused bequest; move this up the call stack?
             if ("".equals(barcode)) {
-                display.setText("Scanning error: empty barcode");
+                displayEmptyBarcodeMessage();
                 return;//guard clause
             }
             if (pricesByBarcode.containsKey(barcode))
-                display.setText(pricesByBarcode.get(barcode));
+                displayPrice(pricesByBarcode.get(barcode));
             else
-                display.setText("Product not found for " +
+                displayProductNotFoundMessage("Product not found for " +
                         barcode);
+        }
+
+        private void displayPrice(String text) {
+            display.setText(text);
+        }
+
+        private void displayProductNotFoundMessage(String text) {
+            display.setText(text);
+        }
+
+        private void displayEmptyBarcodeMessage() {
+            displayProductNotFoundMessage("Scanning error: empty barcode");
         }
     }
 }
