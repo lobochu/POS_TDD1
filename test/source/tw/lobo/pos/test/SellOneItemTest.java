@@ -4,7 +4,6 @@ package tw.lobo.pos.test;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -99,14 +98,18 @@ public class SellOneItemTest {
                 return;//guard clause
             }
             if (pricesByBarcode.containsKey(barcode))
-                displayPrice(pricesByBarcode.get(barcode));
+                displayPrice(findPrice(barcode));
             else
                 displayProductNotFoundMessage("Product not found for " +
                         barcode);
         }
 
-        private void displayPrice(String text) {
-            display.setText(text);
+        private void displayPrice(String priceAsText) {
+            display.setText(priceAsText);
+        }
+
+        private String findPrice(String barcode) {
+            return pricesByBarcode.get(barcode);
         }
 
         private void displayProductNotFoundMessage(String text) {
