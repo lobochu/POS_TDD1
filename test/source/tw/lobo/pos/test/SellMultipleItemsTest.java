@@ -10,10 +10,12 @@ import static org.junit.Assert.assertEquals;
 public class SellMultipleItemsTest {
     @Test
     public void zeroItems() throws Exception {
-//        Display display = new Display();
+        Display display = new Display();
 
-//        new Sale().onTotal();
-//        assertEquals("No sale in progress. Try scanning a product.", display.getText());
+        Sale sale = new Sale(null, display);
+        sale.onTotal();
+
+        assertEquals("No sale in progress. Try scanning a product.", display.getText());
 
     }
 }
