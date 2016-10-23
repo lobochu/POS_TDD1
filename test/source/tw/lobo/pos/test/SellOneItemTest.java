@@ -68,57 +68,6 @@ public class SellOneItemTest {
         assertEquals("Scanning error: empty barcode", display.getText());
     }
 
-    public static class Display {
-
-        private String text;
-
-        public String getText() {
-            return text;
-        }
-
-        public void displayPrice(String priceAsText) {
-            this.text = priceAsText;
-        }
-
-        public void displayProductNotFoundMessage(String text) {
-            this.text = "Product not found for " + text;
-        }
-
-        public void displayEmptyBarcodeMessage() {
-            this.text = "Scanning error: empty barcode";
-        }
-    }
-
-    public static class Sale {
-        private final Catalog catalog;
-        private Display display;
-
-        public Sale(Catalog catalog, Display display) {
-            this.display = display;
-            //introduce lookup table
-            this.catalog = catalog;
-        }
-
-        public void onBarcode(String barcode) {
-            //SMELL Refused bequest; move this up the call stack?
-            if ("".equals(barcode)) {
-                display.displayEmptyBarcodeMessage();
-                return;//guard clause
-            }
-
-            //1. Find price.
-            String priceAsText = catalog.findPrice(barcode);
-            //2. If didn't get one, display product not found
-            if (priceAsText == null) {
-                display.displayProductNotFoundMessage(barcode);
-                //3. If I did get one, diplay the price.
-            } else {
-                display.displayPrice(priceAsText);
-            }
-        }
-
-    }
-
     public static class Catalog {
         private final Display display;
         private final Map<String, String> pricesByBarcode;
@@ -133,7 +82,7 @@ public class SellOneItemTest {
         }
 
 
-        private String findPrice(String barcode) {
+        public String findPrice(String barcode) {
             return pricesByBarcode.get(barcode);
         }
     }
