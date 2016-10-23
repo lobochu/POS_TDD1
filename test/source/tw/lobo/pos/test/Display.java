@@ -5,7 +5,7 @@ package tw.lobo.pos.test;
  */
 public class Display {
 
-    public String text;
+    private String text;
 
     public String getText() {
         return text;
@@ -21,5 +21,9 @@ public class Display {
 
     public void displayEmptyBarcodeMessage() {
         this.text = "Scanning error: empty barcode";
+    }
+
+    public void displayNoSaleInProgressMessage() {
+        text = "No sale in progress. Try scanning a product.";
     }
 }
