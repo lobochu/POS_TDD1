@@ -4,10 +4,10 @@ package tw.lobo.pos.test;
  * Created by Lobo on 2016/10/23.
  */
 public class Sale {
-    private final SellOneItemTest.Catalog catalog;
+    private final ScanOneItemTest.Catalog catalog;
     private Display display;
 
-    public Sale(SellOneItemTest.Catalog catalog, Display display) {
+    public Sale(ScanOneItemTest.Catalog catalog, Display display) {
         this.display = display;
         //introduce lookup table
         this.catalog = catalog;

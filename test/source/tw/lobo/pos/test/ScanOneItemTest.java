@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by twlcbo on 2016/10/7.
  */
-public class SellOneItemTest {
+public class ScanOneItemTest {
 
 
     private Display display;
