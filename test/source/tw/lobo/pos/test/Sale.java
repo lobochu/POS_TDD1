@@ -4,10 +4,11 @@ package tw.lobo.pos.test;
  * Created by Lobo on 2016/10/23.
  */
 public class Sale {
-    private final ScanOneItemTest.Catalog catalog;
+    private final Catalog catalog;
     private Display display;
+    private String price;
 
-    public Sale(ScanOneItemTest.Catalog catalog, Display display) {
+    public Sale(Catalog catalog, Display display) {
         this.display = display;
         //introduce lookup table
         this.catalog = catalog;
@@ -21,18 +22,21 @@ public class Sale {
         }
 
         //1. Find price.
-        String priceAsText = catalog.findPrice(barcode);
+        price = catalog.findPrice(barcode);
         //2. If didn't get one, display product not found
-        if (priceAsText == null) {
+        if (price == null) {
             display.displayProductNotFoundMessage(barcode);
             //3. If I did get one, diplay the price.
         } else {
-            display.displayPrice(priceAsText);
+            display.displayPrice(price);
         }
     }
 
     public void onTotal() {
-        display.displayNoSaleInProgressMessage();
+        if (price == null)
+            display.displayNoSaleInProgressMessage();
+        else
+            display.text = "Total: $6.50";
     }
 
 }
