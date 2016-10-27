@@ -6,7 +6,7 @@ package tw.lobo.pos.test;
 public class Sale {
     private final Catalog catalog;
     private Display display;
-    private String price;
+    private String scannedPrice;
 
     public Sale(Catalog catalog, Display display) {
         this.display = display;
@@ -21,22 +21,26 @@ public class Sale {
             return;//guard clause
         }
 
-        //1. Find price.
-        price = catalog.findPrice(barcode);
+        //1. Find scannedPrice.
+        scannedPrice = catalog.findPrice(barcode);
+//        scannedPrices.add(scannedPrice);
         //2. If didn't get one, display product not found
-        if (price == null) {
+        if (scannedPrice == null) {
             display.displayProductNotFoundMessage(barcode);
-            //3. If I did get one, diplay the price.
+            //3. If I did get one, diplay the scannedPrice.
         } else {
-            display.displayPrice(price);
+            display.displayPrice(scannedPrice);
         }
     }
 
     public void onTotal() {
-        if (price == null)
+        //Reverse conditional logic to normal path
+        boolean saleInProgress = (scannedPrice != null);
+        if (saleInProgress) {
+            display.displayPurchaseTotal(scannedPrice);
+        } else {
             display.displayNoSaleInProgressMessage();
-        else
-            display.displayPurchaseTotal(price);
+        }
     }
 
 }
