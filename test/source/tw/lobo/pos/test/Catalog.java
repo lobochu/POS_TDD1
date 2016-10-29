@@ -6,15 +6,18 @@ import java.util.Map;
  * Created by Lobo on 2016/10/25.
  */
 public class Catalog {
-    private final Map<String, String> pricesByBarcode;
+    private Map<String, String> priceAsTextByBarcode;
+    private Map<String, Integer> priceInCentByBarCode;
 
-    public Catalog( Map<String, String> pricesByBarcode) {
-        this.pricesByBarcode = pricesByBarcode;
+
+    public Catalog(Map<String, String> priceAsTextByBarcode, Map<String, Integer> priceInCentByBarCode) {
+
+        this.priceAsTextByBarcode = priceAsTextByBarcode;
+        this.priceInCentByBarCode = priceInCentByBarCode;
     }
 
 
-
     public String findPrice(String barcode) {
-        return pricesByBarcode.get(barcode);
+        return priceAsTextByBarcode.get(barcode);
     }
 }
