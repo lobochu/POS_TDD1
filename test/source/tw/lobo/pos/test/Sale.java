@@ -29,15 +29,19 @@ public class Sale {
             display.displayProductNotFoundMessage(barcode);
             //3. If I did get one, diplay the scannedPrice.
         } else {
-            display.displayPrice(scannedPrice);
+            display.displayPrice(formatMonetaryAmount(scannedPrice));
         }
+    }
+
+    private String formatMonetaryAmount(String priceAsText) {
+        return priceAsText;
     }
 
     public void onTotal() {
         //Reverse conditional logic to normal path
         boolean saleInProgress = (scannedPrice != null);
         if (saleInProgress) {
-            display.displayPurchaseTotal(scannedPrice);
+            display.displayPurchaseTotal(formatMonetaryAmount(scannedPrice));
         } else {
             display.displayNoSaleInProgressMessage();
         }
