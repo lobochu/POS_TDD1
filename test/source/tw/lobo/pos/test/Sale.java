@@ -22,7 +22,7 @@ public class Sale {
         }
 
         //1. Find scannedPrice.
-        scannedPrice = catalog.findPrice(barcode);
+        scannedPrice = catalog.findThenFormatPrice(barcode);
 //        scannedPrices.add(scannedPrice);
         //2. If didn't get one, display product not found
         if (scannedPrice == null) {
