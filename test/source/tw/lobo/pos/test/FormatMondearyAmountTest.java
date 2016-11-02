@@ -25,7 +25,7 @@ public class FormatMondearyAmountTest {
         this.expectedFormattedPrice = expectedFormattedPrice;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Monetary amount {0} formats to {1}")
     public static Collection<Object[]> data() {
 
         return Collections.singletonList(
