@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -27,15 +28,20 @@ public class FormatMondearyAmountTest {
 
     @Parameterized.Parameters(name = "Monetary amount {0} formats to {1}")
     public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {789, "$7.89"},
+                {520, "$5.20"}
+        });
 
-        return Collections.singletonList(
-                new Object[]
-                        {789, "$7.89"}
-        );
+//        return Collections.singletonList(
+//                new Object[]
+//                        {789, "$7.89"}
+//        );
     }
 
     private static String format(int priceInCents) {
-        return "$7.89";
+        return String.format("$%.2f",
+                priceInCents / 100.0d);
     }
 
     @Test
