@@ -16,8 +16,18 @@ public class Catalog {
         this.priceInCentByBarCode = priceInCentByBarCode;
     }
 
+    // SMELL Move this behavior somewhere else, why author think about that..??
+    public static String format(int priceInCents) {
+        return String.format("$%,.2f",
+                priceInCents / 100.0d);
+    }
 
-    public String findThenFormatPrice(String barcode) {
-        return priceAsTextByBarcode.get(barcode);
+
+    public String findPriceThenFormatPrice(String barcode) {
+        Integer priceInCents = priceInCentByBarCode.get(barcode);
+        if (priceInCents == null)
+            return null;
+        else
+            return format(priceInCents);
     }
 }

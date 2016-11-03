@@ -42,14 +42,9 @@ public class FormatMondearyAmountTest {
 //        );
     }
 
-    private static String format(int priceInCents) {
-        return String.format("$%,.2f",
-                priceInCents / 100.0d);
-    }
-
     @Test
     public void test() throws Exception {
-        assertEquals(expectedFormattedPrice, format(priceInCents));
+        assertEquals(expectedFormattedPrice, Catalog.format(priceInCents));
 
     }
 
