@@ -23,11 +23,7 @@ public class Catalog {
     }
 
 
-    public String findPriceThenFormatPrice(String barcode) {
-        Integer priceInCents = priceInCentByBarCode.get(barcode);
-        if (priceInCents == null)
-            return null;
-        else
-            return format(priceInCents);
+    public Integer findPrice(String barcode) {
+        return priceInCentByBarCode.get(barcode);
     }
 }

@@ -22,13 +22,16 @@ public class Sale {
         }
 
         //1. Find scannedPrice.
-        scannedPrice = catalog.findPriceThenFormatPrice(barcode);
+        Integer priceInCents = catalog.findPrice(barcode);
+
+
 //        scannedPrices.add(scannedPrice);
         //2. If didn't get one, display product not found
-        if (scannedPrice == null) {
+        if (priceInCents == null) {
             display.displayProductNotFoundMessage(barcode);
             //3. If I did get one, diplay the scannedPrice.
         } else {
+            scannedPrice = Catalog.format(priceInCents);
             display.displayPrice(scannedPrice);
         }
     }
