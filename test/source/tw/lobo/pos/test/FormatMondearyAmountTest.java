@@ -30,7 +30,13 @@ public class FormatMondearyAmountTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {789, "$7.89"},
-                {520, "$5.20"}
+                {520, "$5.20"},
+                {400, "$4.00"},
+                {0, "$0.00"},
+                {2, "$0.02"},
+                {37, "$0.37"},
+                {418976, "$4,189.76"},
+                {210832281, "$2,108,322.81"}
         });
 
 //        return Collections.singletonList(
@@ -40,7 +46,7 @@ public class FormatMondearyAmountTest {
     }
 
     private static String format(int priceInCents) {
-        return String.format("$%.2f",
+        return String.format("$%,.2f",
                 priceInCents / 100.0d);
     }
 
