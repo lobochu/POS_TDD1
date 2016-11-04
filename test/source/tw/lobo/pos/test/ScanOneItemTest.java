@@ -15,7 +15,6 @@ public class ScanOneItemTest {
 
 
     private Display display;
-    private Display display1;
     private Sale sale;
 
     @Before
