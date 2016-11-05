@@ -1,13 +1,11 @@
 package tw.lobo.pos.test;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -45,14 +43,9 @@ public class FormatMondearyAmountTest {
 //        );
     }
 
-    private static String format(int priceInCents) {
-        return String.format("$%,.2f",
-                priceInCents / 100.0d);
-    }
-
     @Test
     public void test() throws Exception {
-        assertEquals(expectedFormattedPrice, format(priceInCents));
+        assertEquals(expectedFormattedPrice, Catalog.format(priceInCents));
 
     }
 
