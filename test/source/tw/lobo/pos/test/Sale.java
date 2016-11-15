@@ -41,10 +41,14 @@ public class Sale {
         //Reverse conditional logic to normal path
         boolean saleInProgress = (!pendingPurchaseItemPrices.isEmpty() );
         if (saleInProgress) {
-            display.displayPurchaseTotal(Display.format(pendingPurchaseItemPrices.iterator().next()));
+            display.displayPurchaseTotal(pendingPurchaseTotal() );
         } else {
             display.displayNoSaleInProgressMessage();
         }
+    }
+
+    private Integer pendingPurchaseTotal() {
+        return pendingPurchaseItemPrices.iterator().next();
     }
 
 }
