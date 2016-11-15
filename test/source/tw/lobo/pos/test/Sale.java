@@ -32,7 +32,7 @@ public class Sale {
             //3. If I did get one, diplay the scannedPrice.
         } else {
             scannedPrice = Display.format(priceInCents);
-            display.displayPrice(scannedPrice);
+            display.displayText(scannedPrice);
         }
     }
 

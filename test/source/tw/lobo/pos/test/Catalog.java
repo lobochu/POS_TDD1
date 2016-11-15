@@ -9,7 +9,7 @@ public class Catalog {
     private Map<String, Integer> priceInCentByBarCode;
 
 
-    public Catalog(Map<String, String> priceAsTextByBarcode, Map<String, Integer> priceInCentByBarCode) {
+    public Catalog(Map<String, Integer> priceInCentByBarCode) {
 
         this.priceInCentByBarCode = priceInCentByBarCode;
     }
