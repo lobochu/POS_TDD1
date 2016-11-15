@@ -31,7 +31,7 @@ public class Sale {
             display.displayProductNotFoundMessage(barcode);
             //3. If I did get one, diplay the scannedPrice.
         } else {
-            scannedPrice = Catalog.format(priceInCents);
+            scannedPrice = Display.format(priceInCents);
             display.displayPrice(scannedPrice);
         }
     }
