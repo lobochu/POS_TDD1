@@ -7,11 +7,17 @@ public class Display {
 
     public String text;
 
+    // SMELL Move this behavior somewhere else, why author think about that..??
+    public static String format(int priceInCents) {
+        return String.format("$%,.2f",
+                priceInCents / 100.0d);
+    }
+
     public String getText() {
         return text;
     }
 
-    public void displayPrice(String priceAsText) {
+    public void displayText(String priceAsText) {
         this.text = priceAsText;
     }
 
@@ -27,7 +33,11 @@ public class Display {
         this.text = "No sale in progress. Try scanning a product.";
     }
 
-    public void displayPurchaseTotal(String price) {
-        this.text = "Total: " + price;
+    public void displayPurchaseTotal(Integer purchaseTotal) {
+        this.text = "Total: " + format(purchaseTotal);
+    }
+
+    public void displayPrice(Integer priceInCents) {
+        displayText(format(priceInCents));
     }
 }

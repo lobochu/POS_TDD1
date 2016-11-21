@@ -7,7 +7,6 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -45,7 +44,7 @@ public class FormatMondearyAmountTest {
 
     @Test
     public void test() throws Exception {
-        assertEquals(expectedFormattedPrice, Catalog.format(priceInCents));
+        assertEquals(expectedFormattedPrice, Display.format(priceInCents));
 
     }
 
