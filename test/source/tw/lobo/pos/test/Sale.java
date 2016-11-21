@@ -32,15 +32,15 @@ public class Sale {
             display.displayProductNotFoundMessage(barcode);
             //3. If I did get one, diplay the scannedPrice.
         } else {
+
+            //REFACTOR Eventually a shopping cart?
             pendingPurchaseItemPrices.add(priceInCents);
             display.displayPrice(priceInCents);
         }
     }
 
     public void onTotal() {
-        //Reverse conditional logic to normal path
-        boolean saleInProgress = !pendingPurchaseItemPrices.isEmpty();
-        if (saleInProgress) {
+        if (!pendingPurchaseItemPrices.isEmpty()) {
             display.displayPurchaseTotal(pendingPurchaseTotal() );
         } else {
             display.displayNoSaleInProgressMessage();
