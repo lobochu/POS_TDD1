@@ -39,7 +39,7 @@ public class Sale {
 
     public void onTotal() {
         //Reverse conditional logic to normal path
-        boolean saleInProgress = (!pendingPurchaseItemPrices.isEmpty() );
+        boolean saleInProgress = !pendingPurchaseItemPrices.isEmpty();
         if (saleInProgress) {
             display.displayPurchaseTotal(pendingPurchaseTotal() );
         } else {
@@ -47,6 +47,7 @@ public class Sale {
         }
     }
 
+    // REFACTOR Looks like Model behavior to me
     private Integer pendingPurchaseTotal() {
         return pendingPurchaseItemPrices.iterator().next();
     }
