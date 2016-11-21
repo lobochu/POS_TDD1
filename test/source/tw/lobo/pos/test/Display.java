@@ -5,7 +5,7 @@ package tw.lobo.pos.test;
  */
 public class Display {
 
-    public String text;
+    private String text;
 
     // SMELL Move this behavior somewhere else, why author think about that..??
     public static String format(int priceInCents) {
