@@ -30,11 +30,7 @@ public class ComputePurchaseTotalTest {
     }
 
     private int computePurchaseTotal(List<Integer> purchaseItemPrices) {
-        if (purchaseItemPrices.isEmpty())
-            return 0;
-        else if (purchaseItemPrices.size() == 1)
-            return Sale.computePurchaseTotal(purchaseItemPrices).intValue();
-        else
             return purchaseItemPrices.stream().reduce(0, Integer::sum);
+//        return purchaseItemPrices.stream().reduce(0, (accumulator, each) -> accumulator + each);
     }
 }
