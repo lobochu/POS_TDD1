@@ -52,7 +52,7 @@ public class Sale {
         return computePurchaseTotal(pendingPurchaseItemPrices);
     }
 
-    private static Integer computePurchaseTotal(Collection<Integer> pendingPurchaseItemPrices) {
+    public static Integer computePurchaseTotal(Collection<Integer> pendingPurchaseItemPrices) {
         return pendingPurchaseItemPrices.iterator().next();
     }
 
