@@ -36,6 +36,7 @@ public class SellMultipleItemsTest {
         Assert.assertEquals("Total: $6.50", display.getText());
     }
 
+    @Test
     @Ignore
     public void severalItemsAllFound() throws Exception {
         Catalog catalog = new Catalog(new HashMap<String, Integer>() {{
@@ -53,6 +54,7 @@ public class SellMultipleItemsTest {
 
         Assert.assertEquals("Total: $24.55", display.getText());
     }
+
 
     @Test
     public void severalItemsAllNotFound() throws Exception {

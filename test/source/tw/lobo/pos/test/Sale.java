@@ -49,6 +49,10 @@ public class Sale {
 
     // REFACTOR Looks like Model behavior to me
     private Integer pendingPurchaseTotal() {
+        return computePurchaseTotal(pendingPurchaseItemPrices);
+    }
+
+    private static Integer computePurchaseTotal(Collection<Integer> pendingPurchaseItemPrices) {
         return pendingPurchaseItemPrices.iterator().next();
     }
 
