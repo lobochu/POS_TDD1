@@ -53,7 +53,7 @@ public class Sale {
     }
 
     public static Integer computePurchaseTotal(Collection<Integer> pendingPurchaseItemPrices) {
-        return pendingPurchaseItemPrices.iterator().next();
+        return pendingPurchaseItemPrices.stream().reduce(0, Integer::sum);
     }
 
 }

@@ -29,8 +29,7 @@ public class ComputePurchaseTotalTest {
 
     }
 
-    private int computePurchaseTotal(List<Integer> purchaseItemPrices) {
-            return purchaseItemPrices.stream().reduce(0, Integer::sum);
-//        return purchaseItemPrices.stream().reduce(0, (accumulator, each) -> accumulator + each);
+    private static int computePurchaseTotal(List<Integer> purchaseItemPrices) {
+        return Sale.computePurchaseTotal(purchaseItemPrices);
     }
 }

@@ -37,7 +37,6 @@ public class SellMultipleItemsTest {
     }
 
     @Test
-    @Ignore
     public void severalItemsAllFound() throws Exception {
         Catalog catalog = new Catalog(new HashMap<String, Integer>() {{
             put("1", 850);
@@ -79,6 +78,23 @@ public class SellMultipleItemsTest {
 
     private Catalog emptyCatalog() {
         return new Catalog(Collections.emptyMap());
+    }
+
+    @Test
+    public void severalItemsSomeNotFound() throws Exception {
+        Catalog catalog = new Catalog(new HashMap<String, Integer>() {{
+            put("1", 1200);
+            put("2", 500);
+        }});
+
+        Display display = new Display();
+        Sale sale = new Sale(catalog, display);
+        sale.onBarcode("1");
+        sale.onBarcode("you don't know this product");
+        sale.onBarcode("2");
+        sale.onTotal();
+
+        Assert.assertEquals("Total: $17.00", display.getText());
     }
 
     @Test
