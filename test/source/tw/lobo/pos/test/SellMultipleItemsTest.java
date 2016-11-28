@@ -81,6 +81,23 @@ public class SellMultipleItemsTest {
     }
 
     @Test
+    public void serveralItemsOfWhichOneIsEmpty() throws Exception {
+        Catalog catalog = new Catalog(new HashMap<String, Integer>() {{
+            put("1", 3100);
+            put("2", 460);
+        }});
+
+        Display display = new Display();
+        Sale sale = new Sale(catalog, display);
+        sale.onBarcode("1");
+        sale.onBarcode("");
+        sale.onBarcode("2");
+        sale.onTotal();
+
+        Assert.assertEquals("Total: $35.60", display.getText());
+    }
+
+    @Test
     public void severalItemsSomeNotFound() throws Exception {
         Catalog catalog = new Catalog(new HashMap<String, Integer>() {{
             put("1", 1200);
